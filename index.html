@@ -1,10 +1,14 @@
 <!doctype html>
+
 <html lang="no">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Habibi Express — Bestill flytting</title>
   <meta name="description" content="Luksuriøs og enkel flytting i Bergen. Ta et bilde eller fyll ut skjema – vi gir pris etter vurdering."/>
+  <meta property="og:title" content="Habibi Express — Bestill flytting"/>
+  <meta property="og:description" content="Luksuriøs og enkel flytting i Bergen. Ta et bilde eller fyll ut skjema – vi gir pris etter vurdering."/>
+  <meta property="og:type" content="website"/>
   <style>
     :root{
       --brand:#111827; /* primær/knapp */
@@ -18,78 +22,83 @@
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0;font:16px/1.5 var(--font);color:var(--text);background:#fff}
-    .container{max-width:1120px;margin:0 auto;padding:0 20px}
+    .container{max-width:1120px;margin:0 auto;padding:0 20px}/* HERO */
+.hero{position:relative;min-height:92vh;display:grid;place-items:center;overflow:hidden;color:#fff}
+.hero-img{position:absolute;inset:0;background:#000 center/cover no-repeat;filter:var(--hero-filter, contrast(1.05) saturate(.98));}
+.hero-overlay{position:absolute;inset:0;background:var(--overlay)}
+.hero-inner{position:relative;z-index:1;text-align:center;padding:0 16px}
+h1{font-weight:900;letter-spacing:-0.02em;margin:0;font-size:clamp(32px,6vw,64px)}
+.lead{max-width:780px;margin:14px auto 0;opacity:.98;font-size:clamp(16px,2.2vw,20px)}
+.btn{display:inline-block;border-radius:999px;background:#fff;color:#0f172a;padding:14px 22px;font-weight:700;text-decoration:none;border:2px solid transparent;box-shadow:0 6px 18px rgba(0,0,0,.15)}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.2)}
+.logo{display:block;margin:0 auto 10px;max-width:min(220px,60vw)}
 
-    /* HERO */
-    .hero{position:relative;min-height:92vh;display:grid;place-items:center;overflow:hidden;color:#fff}
-    .hero-img{position:absolute;inset:0;background:#000 center/cover no-repeat;filter:var(--hero-filter, contrast(1.05) saturate(.98));}
-    .hero-overlay{position:absolute;inset:0;background:var(--overlay)}
-    .hero-inner{position:relative;z-index:1;text-align:center;padding:0 16px}
-    h1{font-weight:900;letter-spacing:-0.02em;margin:0;font-size:clamp(32px,6vw,64px)}
-    .lead{max-width:780px;margin:14px auto 0;opacity:.98;font-size:clamp(16px,2.2vw,20px)}
-    .btn{display:inline-block;border-radius:999px;background:#fff;color:#0f172a;padding:14px 22px;font-weight:700;text-decoration:none;border:2px solid transparent;box-shadow:0 6px 18px rgba(0,0,0,.15)}
-    .btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.2)}
-    .logo{display:block;margin:0 auto 10px;max-width:min(220px,60vw)}
+/* Section */
+section{padding:56px 0}
+h2{font-size:28px;margin:0 0 6px;font-weight:800}
+.muted{color:var(--muted)}
 
-    /* Section */
-    section{padding:56px 0}
-    h2{font-size:28px;margin:0 0 6px;font-weight:800}
-    .muted{color:var(--muted)}
+/* Mode cards */
+.grid{display:grid;gap:14px}
+@media(min-width:860px){.grid.cols-3{grid-template-columns:repeat(3,1fr)}}
+.card{border:1px solid #e5e7eb;border-radius:var(--radius);padding:var(--pad);background:#fff;transition:.2s ease}
+.card:hover{border-color:#cbd5e1}
+.card.active{border-color:var(--brand);box-shadow:0 10px 24px rgba(15,23,42,.08)}
+.badge{display:inline-block;background:#f1f5f9;color:#334155;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:600}
 
-    /* Mode cards */
-    .grid{display:grid;gap:14px}
-    @media(min-width:860px){.grid.cols-3{grid-template-columns:repeat(3,1fr)}}
-    .card{border:1px solid #e5e7eb;border-radius:var(--radius);padding:var(--pad);background:#fff;transition:.2s ease}
-    .card:hover{border-color:#cbd5e1}
-    .card.active{border-color:var(--brand);box-shadow:0 10px 24px rgba(15,23,42,.08)}
-    .badge{display:inline-block;background:#f1f5f9;color:#334155;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:600}
+/* Two columns area */
+.cols{display:grid;gap:18px}
+@media(min-width:900px){.cols{grid-template-columns:1fr 2fr}}
 
-    /* Two columns area */
-    .cols{display:grid;gap:18px}
-    @media(min-width:900px){.cols{grid-template-columns:1fr 2fr}}
+/* Upload */
+.thumbs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:700px){.thumbs{grid-template-columns:repeat(4,1fr)}}
+.thumb{width:100%;height:110px;object-fit:cover;border-radius:14px;border:1px solid #e5e7eb}
 
-    /* Upload */
-    .upload{border:1px dashed #cbd5e1;border-radius:var(--radius);padding:16px}
-    .thumbs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    @media(min-width:700px){.thumbs{grid-template-columns:repeat(4,1fr)}}
-    .thumb{width:100%;height:110px;object-fit:cover;border-radius:14px;border:1px solid #e5e7eb}
+/* Form */
+form{display:block}
+fieldset{border:1px solid #e5e7eb;border-radius:var(--radius);padding:16px;margin:0 0 16px;background:#fff}
+legend{padding:0 6px;font-weight:800;color:var(--text)}
+label{display:block;margin:0 0 6px;font-size:14px;font-weight:600}
+.row{display:grid;gap:12px}
+@media(min-width:860px){.row.cols-2{grid-template-columns:1fr 1fr}.row.cols-3{grid-template-columns:repeat(3,1fr)}}
+input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="date"], input[type="time"], select, textarea{
+  width:100%;border:1px solid #cbd5e1;border-radius:12px;padding:10px 12px;font:inherit
+}
+textarea{min-height:90px}
+.small{font-size:12px;color:var(--muted)}
+.submitbar{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:16px;flex-wrap:wrap}
+.btn-dark{background:var(--brand);color:#fff;border-radius:12px;padding:12px 18px;border:none;cursor:pointer;font-weight:700}
+.btn-dark:hover{filter:brightness(1.05)}
+.btn-outline{background:#fff;border:1.5px solid var(--brand);color:var(--brand);border-radius:12px;padding:10px 16px;cursor:pointer;font-weight:700}
+.hint{font-size:12px;color:var(--muted);margin-top:6px}
+.flex{display:flex;align-items:center;gap:10px}
 
-    /* Form */
-    form{display:block}
-    fieldset{border:1px solid #e5e7eb;border-radius:var(--radius);padding:16px;margin:0 0 16px;background:#fff}
-    legend{padding:0 6px;font-weight:800;color:var(--text)}
-    label{display:block;margin:0 0 6px;font-size:14px;font-weight:600}
-    .row{display:grid;gap:12px}
-    @media(min-width:860px){.row.cols-2{grid-template-columns:1fr 1fr}.row.cols-3{grid-template-columns:repeat(3,1fr)}}
-    input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="date"], input[type="time"], select, textarea{
-      width:100%;border:1px solid #cbd5e1;border-radius:12px;padding:10px 12px;font:inherit
-    }
-    textarea{min-height:90px}
-    .small{font-size:12px;color:var(--muted)}
-    .submitbar{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:16px;flex-wrap:wrap}
-    .btn-dark{background:var(--brand);color:#fff;border-radius:12px;padding:12px 18px;border:none;cursor:pointer;font-weight:700}
-    .btn-dark:hover{filter:brightness(1.05)}
-    .btn-outline{background:#fff;border:1.5px solid var(--brand);color:var(--brand);border-radius:12px;padding:10px 16px;cursor:pointer;font-weight:700}
-    .hint{font-size:12px;color:var(--muted);margin-top:6px}
-    .flex{display:flex;align-items:center;gap:10px}
+footer{border-top:1px solid #e5e7eb;margin-top:40px;padding:28px 0;text-align:center;color:#64748b}
 
-    footer{border-top:1px solid #e5e7eb;margin-top:40px;padding:28px 0;text-align:center;color:var(--muted)}
+/* Customizer */
+.fab{position:fixed;right:16px;bottom:16px;z-index:5}
+.fab button{background:var(--brand);color:#fff;border:none;border-radius:999px;padding:12px 16px;font-weight:800;box-shadow:0 10px 22px rgba(0,0,0,.2)}
+.panel{position:fixed;inset:auto 0 0 auto;right:16px;bottom:74px;width:min(420px,92vw);max-height:80vh;overflow:auto;background:#fff;border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 15px 40px rgba(0,0,0,.2);padding:14px;display:none}
+.panel h3{margin:0 0 8px;font-size:16px}
+.panel .row{grid-template-columns:1fr 1fr}
+.panel input[type="color"]{height:40px;padding:0}
+.panel .sublabel{font-size:12px;color:var(--muted);margin-top:2px}
+.panel .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 
-    /* Customizer */
-    .fab{position:fixed;right:16px;bottom:16px;z-index:5}
-    .fab button{background:var(--brand);color:#fff;border:none;border-radius:999px;padding:12px 16px;font-weight:800;box-shadow:0 10px 22px rgba(0,0,0,.2)}
-    .panel{position:fixed;inset:auto 0 0 auto;right:16px;bottom:74px;width:min(420px,92vw);max-height:80vh;overflow:auto;background:#fff;border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 15px 40px rgba(0,0,0,.2);padding:14px;display:none}
-    .panel h3{margin:0 0 8px;font-size:16px}
-    .panel .row{grid-template-columns:1fr 1fr}
-    .panel input[type="color"]{height:40px;padding:0}
-    .panel .sublabel{font-size:12px;color:var(--muted);margin-top:2px}
-    .panel .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-      /* Compact inventory */
-    .mini-grid{display:grid;gap:8px}
-    @media(min-width:900px){.mini-grid{grid-template-columns:repeat(4,1fr)}}
-    .chip{display:flex;align-items:center;justify-content:space-between;border:1px solid #e5e7eb;border-radius:12px;padding:8px 10px;background:#fff}
-    .chip label{margin:0;font-weight:600;font-size:13px}
-    .qty{width:68px;text-align:center}
+/* Compact inventory */
+.mini-grid{display:grid;gap:8px}
+@media(min-width:700px){.mini-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.mini-grid{grid-template-columns:repeat(4,1fr)}}
+.chip{display:flex;align-items:center;justify-content:space-between;border:1px solid #e5e7eb;border-radius:12px;padding:8px 10px;background:#fff}
+.chip label{margin:0;font-weight:600;font-size:13px;display:flex;align-items:center;gap:6px}
+.qty{width:68px;text-align:center}
+
+/* Sticky CTA on mobile */
+.stickycta{position:fixed;bottom:12px;left:0;right:0;display:flex;justify-content:center;z-index:6}
+.stickycta a{background:var(--brand);color:#fff;padding:12px 20px;border-radius:999px;text-decoration:none;font-weight:800;box-shadow:0 12px 28px rgba(0,0,0,.25)}
+@media(min-width:860px){.stickycta{display:none}}
+
   </style>
 </head>
 <body>
@@ -101,327 +110,318 @@
       <img id="logo" class="logo" alt="Habibi Express" style="display:none"/>
       <h1 id="heroTitle">Habibi Express</h1>
       <p id="heroSub" class="lead">Luksuriøs og enkel flytting i Bergen. Ta et bilde eller fyll ut skjema – vi gir pris etter vurdering.</p>
-      <p class="lead" style="opacity:.9;font-weight:600;margin-top:6px">«تعال إلى دبي» — +47 47 8787 69</p>
+      <p class="lead" style="opacity:.9;font-weight:600;margin-top:6px">«تعال إلى دبي» — <a href="tel:+4747878769" style="color:#fff;text-decoration:underline">+47 47 8787 69</a></p>
       <a id="heroCTA" href="#bestill" class="btn">Bestill flytting</a>
     </div>
-  </header>
-
-  <!-- BESTILLING -->
-  <section id="bestill">
+  </header>  <!-- BESTILLING -->  <section id="bestill">
     <div class="container">
       <h2>Hvordan vil du bestille?</h2>
-      <p class="muted">Velg det som passer best. <strong>Skjema + Bilder</strong> anbefales for rask vurdering og fastpris etterpå.</p>
+      <p class="muted">Velg det som passer best. <strong>Skjema + Bilder</strong> anbefales for rask vurdering og fastpris etterpå.</p><div class="grid cols-3" style="margin-top:14px">
+    <button class="card" id="m-form-photos">
+      <div style="font-weight:700">Skjema + Bilder</div>
+      <div class="muted" style="font-size:14px">Anbefalt – fastpris mulig raskt</div>
+    </button>
+    <button class="card" id="m-form">
+      <div style="font-weight:700">Kun Skjema</div>
+      <div class="muted" style="font-size:14px">Vi kan be om bilder etterpå</div>
+    </button>
+    <button class="card" id="m-photos">
+      <div style="font-weight:700">Kun Bilder</div>
+      <div class="muted" style="font-size:14px">Vi gir ca. pris først</div>
+    </button>
+  </div>
 
-      <div class="grid cols-3" style="margin-top:14px">
-        <button class="card" id="m-form-photos">
-          <div style="font-weight:700">Skjema + Bilder</div>
-          <div class="muted" style="font-size:14px">Anbefalt – fastpris mulig raskt</div>
-        </button>
-        <button class="card" id="m-form">
-          <div style="font-weight:700">Kun Skjema</div>
-          <div class="muted" style="font-size:14px">Vi kan be om bilder etterpå</div>
-        </button>
-        <button class="card" id="m-photos">
-          <div style="font-weight:700">Kun Bilder</div>
-          <div class="muted" style="font-size:14px">Vi gir ca. pris først</div>
-        </button>
-      </div>
+  <div style="margin-top:10px" class="muted small" id="modeBadge">Fastpris mulig etter gjennomgang</div>
 
-      <div style="margin-top:10px" class="muted small" id="modeBadge">Fastpris mulig etter gjennomgang</div>
+  <div class="cols" style="margin-top:20px">
+    <main id="formCol" class="card">
+      <h3 style="margin:6px 0 12px;font-size:18px">Skjema for bestilling</h3>
+      <p class="small">Pris vises ikke på nettsiden — vi svarer med fastpris/ca. pris etter vurdering.</p>
 
-      <div class="cols" style="margin-top:20px">
-        <!-- Upload-kolonne (vises i form+photos og photos) -->
-        <aside id="uploadCol" class="card" style="display:none">
-          <h3 style="margin:6px 0 12px;font-size:18px">Bilder / video</h3>
+      <!-- Netlify Forms: ingen API-nøkkel nødvendig -->
+      <form id="bookingForm" name="booking" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" enctype="multipart/form-data">
+        <input type="hidden" name="form-name" value="booking"/>
+        <input type="hidden" name="modus" id="modus" value="form+photos"/>
+        <p style="display:none"><label>Ikke fyll ut dette: <input name="bot-field"/></label></p>
+
+        <fieldset>
+          <legend>Kontaktinformasjon</legend>
+          <div class="row cols-2">
+            <div>
+              <label>Fullt navn</label>
+              <input name="name" type="text" required>
+            </div>
+            <div>
+              <label>Telefon</label>
+              <input name="phone" type="tel" placeholder="+47 47 8787 69" required>
+            </div>
+          </div>
+          <div class="row cols-2" style="margin-top:12px">
+            <div>
+              <label>E‑post</label>
+              <input name="email" type="email" required>
+            </div>
+            <div>
+              <label>Foretrukket kontakt</label>
+              <select name="preferred">
+                <option>Telefon</option>
+                <option>SMS</option>
+                <option>E‑post</option>
+                <option>WhatsApp</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Adresser & kjøring</legend>
+          <div class="row cols-2">
+            <div>
+              <label>Fra‑adresse</label>
+              <input name="from" type="text" required>
+            </div>
+            <div>
+              <label>Til‑adresse</label>
+              <input name="to" type="text" required>
+            </div>
+          </div>
+          <div style="margin-top:12px">
+            <label>Ekstra stopp (valgfritt)</label>
+            <div id="stops"></div>
+            <div class="flex" style="margin-top:8px">
+              <button type="button" class="btn-outline" id="addStop">Legg til stopp</button>
+              <span class="hint">Du kan legge til flere underveis</span>
+            </div>
+          </div>
+          <div class="row cols-2" style="margin-top:12px">
+            <div>
+              <label>Kjøretid fra Google Maps (min) <span class="small">(manuelt nå)</span></label>
+              <input name="driveMinutes" type="number" min="0" placeholder="F.eks. 25">
+            </div>
+            <div>
+              <label>Kommentar til ruten (valgfritt)</label>
+              <input name="routeNotes" type="text" placeholder="Kjøring via bom/ferge, veiarbeid, etc.">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset id="photosFieldset">
+          <legend>Bilder / video</legend>
           <p class="small">Last opp oversikt av hvert rom + nærbilder av store/tunge ting.</p>
-          <input id="fileInput" type="file" multiple accept="image/*,video/*"/>
+          <input id="fileInput" name="photos" type="file" multiple accept="image/*,video/*"/>
           <div id="thumbs" class="thumbs" style="margin-top:12px"></div>
           <p class="hint">Tips: Ta bilde av inngang, trapper/heis og bæreavstander.</p>
-        </aside>
+        </fieldset>
 
-        <!-- Skjema-kolonne (vises i form+photos og form) -->
-        <main id="formCol" class="card">
-          <h3 style="margin:6px 0 12px;font-size:18px">Skjema for bestilling</h3>
-          <p class="small">Pris vises ikke på nettsiden — vi svarer med fastpris/ca. pris etter vurdering.</p>
-
-          <form id="bookingForm">
-            <!-- Skjult modusfelt -->
-            <input type="hidden" name="modus" id="modus" value="form+photos"/>
-
-            <fieldset>
-              <legend>Kontaktinformasjon</legend>
-              <div class="row cols-2">
-                <div>
-                  <label>Fullt navn</label>
-                  <input name="name" type="text" required>
-                </div>
-                <div>
-                  <label>Telefon</label>
-                  <input name="phone" type="tel" placeholder="+47 47 8787 69" required>
-                </div>
-              </div>
-              <div class="row cols-2" style="margin-top:12px">
-                <div>
-                  <label>E-post</label>
-                  <input name="email" type="email" required>
-                </div>
-                <div>
-                  <label>Foretrukket kontakt</label>
-                  <select name="preferred">
-                    <option>Telefon</option>
-                    <option>SMS</option>
-                    <option>E-post</option>
-                    <option>WhatsApp</option>
-                  </select>
-                </div>
-              </div>
-            </fieldset>
-
-            <fieldset>
-              <legend>Adresser & kjøring</legend>
-              <div class="row cols-2">
-                <div>
-                  <label>Fra-adresse</label>
-                  <input name="from" type="text" required>
-                </div>
-                <div>
-                  <label>Til-adresse</label>
-                  <input name="to" type="text" required>
-                </div>
-              </div>
-              <div style="margin-top:12px">
-                <label>Ekstra stopp (valgfritt)</label>
-                <div id="stops"></div>
-                <div class="flex" style="margin-top:8px">
-                  <button type="button" class="btn-outline" id="addStop">Legg til stopp</button>
-                  <span class="hint">Du kan legge til flere underveis</span>
-                </div>
-              </div>
-              <div class="row cols-2" style="margin-top:12px">
-                <div>
-                  <label>Kjøretid fra Google Maps (min) <span class="small">(manuelt nå)</span></label>
-                  <input name="driveMinutes" type="number" min="0" placeholder="F.eks. 25">
-                </div>
-                <div>
-                  <label>Kommentar til ruten (valgfritt)</label>
-                  <input name="routeNotes" type="text" placeholder="Kjøring via bom/ferge, veiarbeid, etc.">
-                </div>
-              </div>
-            </fieldset>
-
-            <fieldset>
-              <legend>Tilkomst & boligdetaljer</legend>
-              <div class="row cols-3">
-                <div>
-                  <label>Fra: etasje</label>
-                  <input name="fromFloor" type="number" min="0">
-                </div>
-                <div>
-                  <label>Fra: heis?</label>
-                  <select name="fromElevator"><option>Ja</option><option>Nei</option></select>
-                </div>
-                <div>
-                  <label>Fra: gåavstand fra bil (m)</label>
-                  <input name="fromWalk" type="number" min="0">
-                </div>
-              </div>
-              <div class="row cols-3" style="margin-top:12px">
-                <div>
-                  <label>Til: etasje</label>
-                  <input name="toFloor" type="number" min="0">
-                </div>
-                <div>
-                  <label>Til: heis?</label>
-                  <select name="toElevator"><option>Ja</option><option>Nei</option></select>
-                </div>
-                <div>
-                  <label>Til: gåavstand fra bil (m)</label>
-                  <input name="toWalk" type="number" min="0">
-                </div>
-              </div>
-              <div class="row cols-3" style="margin-top:12px">
-                <div>
-                  <label>Parkering tilgjengelig?</label>
-                  <select name="parking"><option>Ja</option><option>Nei</option><option>Usikkert</option></select>
-                </div>
-                <div>
-                  <label>Må reservere heis/lastesone?</label>
-                  <select name="requiresBooking"><option>Nei</option><option>Ja</option></select>
-                </div>
-                <div>
-                  <label>Portkode / adgang</label>
-                  <input name="entryCode" type="text" placeholder="#1234 / ring vaktmester">
-                </div>
-              </div>
-              <div class="row cols-3" style="margin-top:12px">
-                <div>
-                  <label>Trapp smal / kink?</label>
-                  <select name="stairsNarrow"><option>Nei</option><option>Ja</option><option>Vet ikke</option></select>
-                </div>
-                <div>
-                  <label>Bæreavstand &gt; 30 m?</label>
-                  <select name="longCarry"><option>Nei</option><option>Ja</option></select>
-                </div>
-                <div>
-                  <label>Heis størrelse (omtrentlig)</label>
-                  <input name="elevatorSize" type="text" placeholder="F.eks. 210 × 100 cm">
-                </div>
-              </div>
-            </fieldset>
-
-            <fieldset>
-              <legend>Hva skal flyttes?</legend>
-              <div class="row cols-3">
-                <div>
-                  <label>Boligstørrelse</label>
-                  <select name="homeSize"><option>1-rom</option><option selected>2-rom</option><option>3-rom</option><option>4-rom</option><option>5+ rom</option></select>
-                </div>
-                <div>
-                  <label>Antall esker (ca.)</label>
-                  <input name="boxes" type="number" min="0" placeholder="F.eks. 20">
-                </div>
-                <div>
-                  <label>Volum (m³) om du vet</label>
-                  <input name="volume" type="number" min="0" step="0.5" placeholder="F.eks. 18">
-                </div>
-              </div>
-
-              <!-- Kompakt hurtigliste med vanlige ting -->
-              <div class="mini-grid" style="margin-top:12px">
-                <div class="chip"><label>Sofa 2-seter</label><input class="qty" name="qtySofa2" type="number" min="0" value="0"></div>
-                <div class="chip"><label>Sofa 3-seter</label><input class="qty" name="qtySofa3" type="number" min="0" value="0"></div>
-                <div class="chip"><label>Hjørnesofa</label><input class="qty" name="qtySofaCorner" type="number" min="0" value="0"></div>
-                <div class="chip"><label>Dobbeltseng 150–180</label><input class="qty" name="qtyBedDouble" type="number" min="0" value="0"></div>
-                <div class="chip"><label>Enkeltseng 90–120</label><input class="qty" name="qtyBedSingle" type="number" min="0" value="0"></div>
-                <div class="chip"><label>Garderobeskap</label><input class="qty" name="qtyWardrobe" type="number" min="0" value="0"></div>
-                <div class="chip"><label>Kommode</label><input class="qty" name="qtyDresser" type="number" min="0" value="0"></div>
-                <div class="chip"><label>Spisebord</label><input class="qty" name="qtyDiningTable" type="number" min="0" value="0"></div>
-                <div class="chip"><label>Stoler</label><input class="qty" name="qtyChairs" type="number" min="0" value="0"></div>
-                <div class="chip"><label>TV (≤ 55”)</label><input class="qty" name="qtyTVSmall" type="number" min="0" value="0"></div>
-                <div class="chip"><label>TV (55–65”)</label><input class="qty" name="qtyTVMed" type="number" min="0" value="0"></div>
-                <div class="chip"><label>TV (> 65”)</label><input class="qty" name="qtyTVLarge" type="number" min="0" value="0"></div>
-                <div class="chip"><label>Kjøleskap</label><input class="qty" name="qtyFridge" type="number" min="0" value="0"></div>
-                <div class="chip"><label>Fryser</label><input class="qty" name="qtyFreezer" type="number" min="0" value="0"></div>
-                <div class="chip"><label>Vaskemaskin</label><input class="qty" name="qtyWasher" type="number" min="0" value="0"></div>
-                <div class="chip"><label>Tørketrommel</label><input class="qty" name="qtyDryer" type="number" min="0" value="0"></div>
-                <div class="chip"><label>Skrivebord</label><input class="qty" name="qtyDesk" type="number" min="0" value="0"></div>
-                <div class="chip"><label>Bokhylle</label><input class="qty" name="qtyBookcase" type="number" min="0" value="0"></div>
-              </div>
-
-              <div class="row cols-3" style="margin-top:12px">
-                <div>
-                  <label>Tunge gjenstander</label>
-                  <select name="heavy"><option>Ingen</option><option>Piano/flygel</option><option>Safe</option><option>Stein/grill</option><option>Treningsutstyr</option><option>Annet tungt</option></select>
-                </div>
-                <div>
-                  <label>Demontering nødvendig?</label>
-                  <select name="disassembly"><option>Nei</option><option>Ja, litt (seng/bord)</option><option>Ja, mye (IKEA-skap etc.)</option></select>
-                </div>
-                <div>
-                  <label>Andre store ting (valgfritt)</label>
-                  <input name="bigItemsOther" type="text" placeholder="Piano, safe, treningsapparat, vitrineskap…">
-                </div>
-              </div>
-
-              <div style="margin-top:12px">
-                <label>Sårbart/ekstra forsiktig</label>
-                <input name="fragile" type="text" placeholder="TV > 65”, glass, speil, kunst osv.">
-              </div>
-            </fieldset>
-
-            <fieldset>
-              <legend>Tilleggstjenester</legend>
-              <div class="row cols-3">
-                <div>
-                  <label>Pakkeservice (timer)</label>
-                  <input name="packingHours" type="number" min="0">
-                </div>
-                <div>
-                  <label>Montering/demontering (timer)</label>
-                  <input name="assemblyHours" type="number" min="0">
-                </div>
-                <div>
-                  <label>Bortkjøring av avfall (m³)</label>
-                  <input name="junkM3" type="number" min="0">
-                </div>
-              </div>
-              <div class="row cols-3" style="margin-top:12px">
-                <div>
-                  <label>Utvask ønskes?</label>
-                  <select name="cleaning"><option>Nei</option><option>Ja</option></select>
-                </div>
-                <div>
-                  <label>Bæring kun (uten bil)?</label>
-                  <select name="laborOnly"><option>Nei</option><option>Ja</option></select>
-                </div>
-                <div>
-                  <label>Annet</label>
-                  <input name="other" type="text" placeholder="Nøkkeloverlevering, lager, kjellerbod, ferge osv.">
-                </div>
-              </div>
-            </fieldset>
-
-            <fieldset>
-              <legend>Dato & tidspunkt</legend>
-              <div class="row cols-3">
-                <div>
-                  <label>Ønsket dato</label>
-                  <input name="date" type="date" required>
-                </div>
-                <div>
-                  <label>Alternativ dato (valgfritt)</label>
-                  <input name="altDate" type="date">
-                </div>
-                <div>
-                  <label>Tidsrom</label>
-                  <select name="slot"><option>08:00</option><option>12:00</option><option>16:00</option><option>Fleksibel</option></select>
-                </div>
-              </div>
-              <div class="row cols-3" style="margin-top:12px">
-                <div>
-                  <label>Fleksibilitet</label>
-                  <select name="flex"><option>Nøyaktig tidspunkt</option><option>± 1 dag</option><option>Kun helg</option></select>
-                </div>
-                <div>
-                  <label>Deadline / må være ferdig innen</label>
-                  <input name="deadline" type="time">
-                </div>
-                <div>
-                  <label>Kommentar</label>
-                  <input name="whenNotes" type="text" placeholder="Heisbooking 12–14, stille før 22 osv.">
-                </div>
-              </div>
-            </fieldset>
-
-            <fieldset>
-              <legend>Tilleggsinfo (valgfritt)</legend>
-              <label>Andre detaljer</label>
-              <textarea name="notes" placeholder="Alt annet vi bør vite."></textarea>
-              <div class="flex" style="margin-top:10px">
-                <input id="agree" type="checkbox" required>
-                <label for="agree" class="small">Jeg godkjenner vilkår og personvern, og at dere kan kontakte meg om bestillingen.</label>
-              </div>
-            </fieldset>
-
-            <div class="submitbar">
-              <div class="small">Vi kontakter deg med pris etter vurdering (fastpris eller ca. pris).</div>
-              <div class="flex">
-                <button type="reset" class="btn-outline">Tøm</button>
-                <button type="submit" class="btn-dark">Send forespørsel</button>
-              </div>
+        <fieldset id="accessFieldset">
+          <legend>Tilkomst & boligdetaljer</legend>
+          <div class="row cols-3">
+            <div>
+              <label>Fra: etasje</label>
+              <input name="fromFloor" type="number" min="0">
             </div>
-          </form>
-        </main>
-      </div>
-    </div>
-  </section>
+            <div>
+              <label>Fra: heis?</label>
+              <select name="fromElevator"><option>Ja</option><option>Nei</option></select>
+            </div>
+            <div>
+              <label>Fra: gåavstand fra bil (m)</label>
+              <input name="fromWalk" type="number" min="0">
+            </div>
+          </div>
+          <div class="row cols-3" style="margin-top:12px">
+            <div>
+              <label>Til: etasje</label>
+              <input name="toFloor" type="number" min="0">
+            </div>
+            <div>
+              <label>Til: heis?</label>
+              <select name="toElevator"><option>Ja</option><option>Nei</option></select>
+            </div>
+            <div>
+              <label>Til: gåavstand fra bil (m)</label>
+              <input name="toWalk" type="number" min="0">
+            </div>
+          </div>
+          <div class="row cols-3" style="margin-top:12px">
+            <div>
+              <label>Parkering tilgjengelig?</label>
+              <select name="parking"><option>Ja</option><option>Nei</option><option>Usikkert</option></select>
+            </div>
+            <div>
+              <label>Må reservere heis/lastesone?</label>
+              <select name="requiresBooking"><option>Nei</option><option>Ja</option></select>
+            </div>
+            <div>
+              <label>Portkode / adgang</label>
+              <input name="entryCode" type="text" placeholder="#1234 / ring vaktmester">
+            </div>
+          </div>
+          <div class="row cols-3" style="margin-top:12px">
+            <div>
+              <label>Trapp smal / kink?</label>
+              <select name="stairsNarrow"><option>Nei</option><option>Ja</option><option>Vet ikke</option></select>
+            </div>
+            <div>
+              <label>Bæreavstand &gt; 30 m?</label>
+              <select name="longCarry"><option>Nei</option><option>Ja</option></select>
+            </div>
+            <div>
+              <label>Heis størrelse (omtrentlig)</label>
+              <input name="elevatorSize" type="text" placeholder="F.eks. 210 × 100 cm">
+            </div>
+          </div>
+        </fieldset>
 
-  <footer>
-    © <span id="y"></span> Habibi Express — Bergen. «تعال إلى دبي» — +47 47 8787 69
-  </footer>
+        <fieldset id="itemsFieldset">
+          <legend>Hva skal flyttes?</legend>
+          <div class="row cols-3">
+            <div>
+              <label>Boligstørrelse</label>
+              <select name="homeSize"><option>1‑rom</option><option selected>2‑rom</option><option>3‑rom</option><option>4‑rom</option><option>5+ rom</option></select>
+            </div>
+            <div>
+              <label>Antall esker (ca.)</label>
+              <input name="boxes" type="number" min="0" placeholder="F.eks. 20">
+            </div>
+            <div>
+              <label>Volum (m³) om du vet</label>
+              <input name="volume" type="number" min="0" step="0.5" placeholder="F.eks. 18">
+            </div>
+          </div>
 
-  <!-- Floating Customizer -->
-  <div class="fab"><button id="openCustomizer">✎ Tilpass</button></div>
+          <!-- Kompakt hurtigliste med vanlige ting -->
+          <div class="mini-grid" style="margin-top:12px">
+            <div class="chip"><label>🛋️ Sofa 2‑seter</label><input class="qty" name="qtySofa2" type="number" min="0" value="0"></div>
+            <div class="chip"><label>🛋️ Sofa 3‑seter</label><input class="qty" name="qtySofa3" type="number" min="0" value="0"></div>
+            <div class="chip"><label>🛋️ Hjørnesofa</label><input class="qty" name="qtySofaCorner" type="number" min="0" value="0"></div>
+            <div class="chip"><label>🛏️ Dobbeltseng 150–180</label><input class="qty" name="qtyBedDouble" type="number" min="0" value="0"></div>
+            <div class="chip"><label>🛏️ Enkeltseng 90–120</label><input class="qty" name="qtyBedSingle" type="number" min="0" value="0"></div>
+            <div class="chip"><label>🚪 Garderobeskap</label><input class="qty" name="qtyWardrobe" type="number" min="0" value="0"></div>
+            <div class="chip"><label>🧳 Kommode</label><input class="qty" name="qtyDresser" type="number" min="0" value="0"></div>
+            <div class="chip"><label>🍽️ Spisebord</label><input class="qty" name="qtyDiningTable" type="number" min="0" value="0"></div>
+            <div class="chip"><label>🪑 Stoler</label><input class="qty" name="qtyChairs" type="number" min="0" value="0"></div>
+            <div class="chip"><label>📺 TV (≤ 55”)</label><input class="qty" name="qtyTVSmall" type="number" min="0" value="0"></div>
+            <div class="chip"><label>📺 TV (55–65”)</label><input class="qty" name="qtyTVMed" type="number" min="0" value="0"></div>
+            <div class="chip"><label>📺 TV (> 65”)</label><input class="qty" name="qtyTVLarge" type="number" min="0" value="0"></div>
+            <div class="chip"><label>🧊 Kjøleskap</label><input class="qty" name="qtyFridge" type="number" min="0" value="0"></div>
+            <div class="chip"><label>🧊 Fryser</label><input class="qty" name="qtyFreezer" type="number" min="0" value="0"></div>
+            <div class="chip"><label>🧺 Vaskemaskin</label><input class="qty" name="qtyWasher" type="number" min="0" value="0"></div>
+            <div class="chip"><label>🌀 Tørketrommel</label><input class="qty" name="qtyDryer" type="number" min="0" value="0"></div>
+            <div class="chip"><label>🧑‍💻 Skrivebord</label><input class="qty" name="qtyDesk" type="number" min="0" value="0"></div>
+            <div class="chip"><label>📚 Bokhylle</label><input class="qty" name="qtyBookcase" type="number" min="0" value="0"></div>
+          </div>
+
+          <div class="row cols-3" style="margin-top:12px">
+            <div>
+              <label>Tunge gjenstander</label>
+              <select name="heavy"><option>Ingen</option><option>Piano/flygel</option><option>Safe</option><option>Stein/grill</option><option>Treningsutstyr</option><option>Annet tungt</option></select>
+            </div>
+            <div>
+              <label>Demontering nødvendig?</label>
+              <select name="disassembly"><option>Nei</option><option>Ja, litt (seng/bord)</option><option>Ja, mye (IKEA‑skap etc.)</option></select>
+            </div>
+            <div>
+              <label>Andre store ting (valgfritt)</label>
+              <input name="bigItemsOther" type="text" placeholder="Piano, safe, treningsapparat, vitrineskap…">
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <label>Sårbart/ekstra forsiktig</label>
+            <input name="fragile" type="text" placeholder="TV > 65”, glass, speil, kunst osv.">
+          </div>
+        </fieldset>
+
+        <fieldset id="servicesFieldset">
+          <legend>Tilleggstjenester</legend>
+          <div class="row cols-3">
+            <div>
+              <label>Pakkeservice (timer)</label>
+              <input name="packingHours" type="number" min="0">
+            </div>
+            <div>
+              <label>Montering/demontering (timer)</label>
+              <input name="assemblyHours" type="number" min="0">
+            </div>
+            <div>
+              <label>Bortkjøring av avfall (m³)</label>
+              <input name="junkM3" type="number" min="0">
+            </div>
+          </div>
+          <div class="row cols-3" style="margin-top:12px">
+            <div>
+              <label>Utvask ønskes?</label>
+              <select name="cleaning"><option>Nei</option><option>Ja</option></select>
+            </div>
+            <div>
+              <label>Bæring kun (uten bil)?</label>
+              <select name="laborOnly"><option>Nei</option><option>Ja</option></select>
+            </div>
+            <div>
+              <label>Annet</label>
+              <input name="other" type="text" placeholder="Nøkkeloverlevering, lager, kjellerbod, ferge osv.">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset id="timeFieldset">
+          <legend>Dato & tidspunkt</legend>
+          <div class="row cols-3">
+            <div>
+              <label>Ønsket dato</label>
+              <input name="date" type="date" required>
+            </div>
+            <div>
+              <label>Alternativ dato (valgfritt)</label>
+              <input name="altDate" type="date">
+            </div>
+            <div>
+              <label>Tidsrom</label>
+              <select name="slot"><option>08:00</option><option>12:00</option><option>16:00</option><option>Fleksibel</option></select>
+            </div>
+          </div>
+          <div class="row cols-3" style="margin-top:12px">
+            <div>
+              <label>Fleksibilitet</label>
+              <select name="flex"><option>Nøyaktig tidspunkt</option><option>± 1 dag</option><option>Kun helg</option></select>
+            </div>
+            <div>
+              <label>Deadline / må være ferdig innen</label>
+              <input name="deadline" type="time">
+            </div>
+            <div>
+              <label>Kommentar</label>
+              <input name="whenNotes" type="text" placeholder="Heisbooking 12–14, stille før 22 osv.">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Tilleggsinfo (valgfritt)</legend>
+          <label>Andre detaljer</label>
+          <textarea name="notes" placeholder="Alt annet vi bør vite."></textarea>
+          <div class="flex" style="margin-top:10px">
+            <input id="agree" type="checkbox" required>
+            <label for="agree" class="small">Jeg godkjenner vilkår og personvern, og at dere kan kontakte meg om bestillingen.</label>
+          </div>
+        </fieldset>
+
+        <div class="submitbar">
+          <div class="small">Vi kontakter deg med pris etter vurdering (fastpris eller ca. pris).</div>
+          <div class="flex">
+            <button type="reset" class="btn-outline">Tøm</button>
+            <button type="submit" class="btn-dark">Send forespørsel</button>
+          </div>
+        </div>
+      </form>
+    </main>
+  </div>
+</div>
+
+  </section>  <footer>
+    © <span id="y"></span> Habibi Express — Bergen. «تعال إلى دبي» — <a href="tel:+4747878769">+47 47 8787 69</a>
+  </footer>  <!-- Sticky CTA for mobile -->  <div class="stickycta"><a href="#bestill">Bestill nå</a></div>  <!-- Floating Customizer -->  <div class="fab"><button id="openCustomizer">✎ Tilpass</button></div>
   <aside class="panel" id="panel">
     <h3>Tilpass siden</h3>
     <div class="row cols-2">
@@ -440,7 +440,7 @@
     </div>
     <div class="row cols-2" style="margin-top:10px">
       <div>
-        <label>Hero-bakgrunn (URL)</label>
+        <label>Hero‑bakgrunn (URL)</label>
         <input id="cHeroUrl" type="text" placeholder="https://.../bilde.jpg"/>
         <div class="sublabel">Eller last opp under</div>
         <input id="cHeroFile" type="file" accept="image/*"/>
@@ -460,7 +460,7 @@
         <input id="cSub" type="text" value="Luksuriøs og enkel flytting i Bergen. Ta et bilde eller fyll ut skjema – vi gir pris etter vurdering."/>
       </div>
       <div>
-        <label>CTA-tekst</label>
+        <label>CTA‑tekst</label>
         <input id="cCTA" type="text" value="Bestill flytting"/>
         <label style="margin-top:10px">Skrifttype</label>
         <select id="cFont">
@@ -479,27 +479,41 @@
         Importer <input id="cImport" type="file" accept="application/json" style="display:none">
       </label>
     </div>
-  </aside>
-
-  <script>
-    // --- Mode switching
+  </aside>  <script>
+    // --- Mode switching (skjuler/viser feltsettene, men beholder form på siden for Netlify)
     const modes = { FORM_PHOTOS:'form+photos', FORM:'form', PHOTOS:'photos' };
     let currentMode = modes.FORM_PHOTOS;
     const $ = (q)=>document.querySelector(q);
     const mFormPhotos = $('#m-form-photos');
     const mForm = $('#m-form');
     const mPhotos = $('#m-photos');
-    const uploadCol = $('#uploadCol');
-    const formCol = $('#formCol');
     const badge = $('#modeBadge');
     const modusInput = $('#modus');
 
+    const photosFieldset = $('#photosFieldset');
+    const accessFieldset = $('#accessFieldset');
+    const itemsFieldset  = $('#itemsFieldset');
+    const servicesFieldset = $('#servicesFieldset');
+    const timeFieldset   = $('#timeFieldset');
+
     function setActive(btn){[mFormPhotos,mForm,mPhotos].forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+    function show(el,yes){ el.style.display = yes? 'block':'none'; }
+
     function setMode(mode){
       currentMode = mode; modusInput.value = mode;
-      if(mode===modes.FORM_PHOTOS){ uploadCol.style.display='block'; formCol.style.display='block'; badge.textContent='Fastpris mulig etter gjennomgang'; setActive(mFormPhotos); }
-      if(mode===modes.FORM){ uploadCol.style.display='none'; formCol.style.display='block'; badge.textContent='Fastpris mulig etter gjennomgang'; setActive(mForm); }
-      if(mode===modes.PHOTOS){ uploadCol.style.display='block'; formCol.style.display='none'; badge.textContent='Ca. pris – detaljer avklares senere'; setActive(mPhotos); }
+      if(mode===modes.FORM_PHOTOS){
+        show(photosFieldset,true); show(accessFieldset,true); show(itemsFieldset,true); show(servicesFieldset,true); show(timeFieldset,true);
+        badge.textContent='Fastpris mulig etter gjennomgang'; setActive(mFormPhotos);
+      }
+      if(mode===modes.FORM){
+        show(photosFieldset,false); show(accessFieldset,true); show(itemsFieldset,true); show(servicesFieldset,true); show(timeFieldset,true);
+        badge.textContent='Fastpris mulig etter gjennomgang'; setActive(mForm);
+      }
+      if(mode===modes.PHOTOS){
+        show(photosFieldset,true); show(accessFieldset,false); show(itemsFieldset,false); show(servicesFieldset,false); show(timeFieldset,false);
+        badge.textContent='Ca. pris – detaljer avklares senere'; setActive(mPhotos);
+      }
+      window.location.hash = '#bestill';
     }
     mFormPhotos.addEventListener('click', ()=>setMode(modes.FORM_PHOTOS));
     mForm.addEventListener('click', ()=>setMode(modes.FORM));
@@ -514,7 +528,7 @@
       wrap.className='flex';
       wrap.style.marginBottom='8px';
       wrap.innerHTML = `<input type="text" name="stops[]" placeholder="Stopp" style="flex:1;border:1px solid #cbd5e1;border-radius:12px;padding:10px 12px">
-      <button type="button" class="btn-outline" aria-label="Fjern">Fjern</button>`;
+      <button type=\"button\" class=\"btn-outline\" aria-label=\"Fjern\">Fjern</button>`;
       wrap.querySelector('input').value = value;
       wrap.querySelector('button').addEventListener('click', ()=>wrap.remove());
       stopsEl.appendChild(wrap);
@@ -541,16 +555,17 @@
       })
     }
 
-    // --- Submit (no API yet)
+    // --- Submit: la Netlify håndtere POST hvis vi er på Netlify
     const form = document.getElementById('bookingForm');
+    const isNetlify = form.hasAttribute('data-netlify');
     form.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const data = new FormData(form);
-      const obj = {}; for(const [k,v] of data.entries()){ if(obj[k]){ if(!Array.isArray(obj[k])) obj[k]=[obj[k]]; obj[k].push(v); } else obj[k]=v; }
-      console.log('Habibi submission:', obj, { mode: currentMode });
-      alert('Takk! Forespørselen er registrert. Vi kontakter deg med pris.');
-      form.reset(); setMode(currentMode); // keep mode
-      if(thumbs) thumbs.innerHTML='';
+      if(!isNetlify){
+        e.preventDefault();
+        alert('Takk! Forespørselen er registrert (demo). Når du publiserer på Netlify, lagres innsendingene automatisk.');
+        form.reset();
+        if(thumbs) thumbs.innerHTML='';
+        setMode(currentMode);
+      }
     });
 
     // --- Footer year
@@ -616,7 +631,7 @@
         text: cText.value,
         font: cFont.value,
         logo: cLogoUrl.value || (logoEl.src || ''),
-        hero: { bg: cHeroUrl.value || heroImg.style.backgroundImage.replace(/url\(|\)$/g,'').replace(/"/g,''), overlay: +cOverlay.value, blur: +cBlur.value },
+        hero: { bg: cHeroUrl.value || heroImg.style.backgroundImage.replace(/url|$/g,'').replace(/\"/g,''), overlay: +cOverlay.value, blur: +cBlur.value },
         copy: { title: cTitle.value, sub: cSub.value, cta: cCTA.value }
       }
     }
@@ -632,7 +647,7 @@
       if(href){ const l=document.createElement('link'); l.id=id; l.rel='stylesheet'; l.href=href; document.head.appendChild(l); }
     }
 
-    // Hook up controls (live)
+    // Live controls
     cBrand.addEventListener('input', ()=>{ document.documentElement.style.setProperty('--brand', cBrand.value); });
     cText.addEventListener('input', ()=>{ document.documentElement.style.setProperty('--text', cText.value); });
     cFont.addEventListener('change', ()=>{ document.documentElement.style.setProperty('--font', cFont.value); injectFont(cFont.value); });
@@ -666,6 +681,7 @@
     const saved = load();
     apply(Object.keys(saved).length? saved: defaults);
 
-  </script>
-</body>
+    // footer year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script></body>
 </html>
