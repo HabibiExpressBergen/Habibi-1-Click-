@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Habibi Express – Få fast pris på flytting</title>
+  <meta name="description" content="Superenkelt skjema for fast pris på flytting. 5 felter, under 60 sekunder.">
+  <style>
+    :root{
+      --bg:#fafafa; --text:#111; --muted:#666; --card:#fff; --border:#eee; --primary:#111; --ring:#111;
+      --green-bg:#ecfdf5; --green:#065f46; --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,"Helvetica Neue",sans-serif}
+    .container{max-width:52rem;margin:auto;padding:2.5rem 1rem}
+    h1{font-size:clamp(1.75rem,3vw,2.5rem);line-height:1.15;margin:0 0 .5rem}
+    p{margin:.5rem 0}
+    .muted{color:var(--muted)}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;box-shadow:0 10px 20px rgba(0,0,0,.04)}
+    label{font-size:.9rem;font-weight:600;display:block;margin-bottom:.35rem}
+    input[type="text"],input[type="tel"],input[type="date"]{width:100%;padding:.8rem 1rem;border:1px solid #d4d4d4;border-radius:var(--radius);outline:none}
+    input:focus{box-shadow:0 0 0 2px var(--ring);border-color:var(--ring)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:.9rem 1.2rem;background:var(--primary);color:#fff;border:none;border-radius:var(--radius);cursor:pointer;font-weight:600}
+    .btn:focus{outline:2px solid var(--ring);outline-offset:2px}
+    .footer{font-size:.9rem;text-align:center;color:var(--muted);margin-top:1rem}
+    .previews{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.25rem}
+    .preview{width:80px;height:80px;object-fit:cover;border-radius:12px;border:1px solid #e5e5e5}
+    .success{display:none;margin-top:1rem;border:1px solid #bbf7d0;background:var(--green-bg);color:var(--green);padding:1rem;border-radius:var(--radius)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  </style>
+</head>
+<body>
+  <main class="container" aria-labelledby="page-title">
+    <header style="text-align:center;margin-bottom:1.5rem">
+      <h1 id="page-title">Få fast pris på flytting – på 60 sekunder</h1>
+      <p class="muted">Last opp bilder, fortell oss hvor du skal – vi ringer for bekreftelse og gir en fast pris.</p>
+    </header>
+
+    <section class="card" aria-labelledby="form-title">
+      <h2 id="form-title" style="font-size:1.25rem;margin:0 0 .25rem">Superenkelt skjema</h2>
+      <p class="muted" style="margin-top:-.25rem">5 felter. Det tar under ett minutt.</p>
+
+      <form id="quote-form" novalidate>
+        <!-- Honeypot -->
+        <input type="text" name="website" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div style="margin:.9rem 0">
+          <label for="from">Fra-adresse *</label>
+          <input id="from" name="from" type="text" placeholder="Eks: Kanalveien 1, Bergen" required>
+        </div>
+
+        <div style="margin:.9rem 0">
+          <label for="to">Til-adresse *</label>
+          <input id="to" name="to" type="text" placeholder="Eks: Damsgårdsveien 2, Bergen" required>
+        </div>
+
+        <div style="margin:.9rem 0">
+          <label for="date">Dato *</label>
+          <input id="date" name="date" type="date" required>
+        </div>
+
+        <div style="margin:.9rem 0">
+          <label for="phone">Telefon *</label>
+          <input id="phone" name="phone" type="tel" placeholder="Eks: +47 47 8787 69" required inputmode="tel">
+        </div>
+
+        <div style="margin:.9rem 0">
+          <label for="photos">Bilder av det som skal flyttes (valgfritt)</label>
+          <input id="photos" name="photos" type="file" accept="image/*" multiple>
+          <div id="previews" class="previews" aria-live="polite"></div>
+          <p class="muted" style="font-size:.8rem">Tips: Ta et oversiktsbilde pr. rom. Maks 8 bilder.</p>
+        </div>
+
+        <button class="btn" type="submit" aria-label="Send inn og få fast pris">Få fast pris nå</button>
+
+        <div id="success" class="success" role="status" aria-live="polite">
+          Takk! Vi ringer deg snart for å bekrefte detaljer og oppgi fast pris.
+        </div>
+
+        <p class="muted" style="font-size:.8rem;margin-top:.5rem">
+          Ved innsending godtar du at vi kontakter deg for pris og planlegging. Ingen markedsføring uten samtykke.
+        </p>
+      </form>
+    </section>
+
+    <footer class="footer">
+      <p>Ingen konto. Ingen unødvendige cookies. Vi bruker kun info for pris og å utføre oppdraget.</p>
+      <p>Trenger du hjelp nå? Ring oss: <a href="tel:+4747878769">+47 47 8787 69</a></p>
+    </footer>
+  </main>
+
+  <script>
+    (function(){
+      const form = document.getElementById('quote-form');
+      const previews = document.getElementById('previews');
+      const success = document.getElementById('success');
+      const phoneRegex = /^\+?\d[\d\s]{5,}$/;
+
+      document.getElementById('photos').addEventListener('change', function(e){
+        previews.innerHTML = '';
+        const files = e.target.files;
+        if(!files) return;
+        Array.from(files).slice(0,8).forEach(f => {
+          const url = URL.createObjectURL(f);
+          const img = document.createElement('img');
+          img.src = url; img.alt = f.name; img.loading = 'lazy';
+          img.className = 'preview';
+          previews.appendChild(img);
+        });
+      });
+
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const fd = new FormData(form);
+
+        // honeypot
+        if ((fd.get('website') || '').toString().trim().length) { alert('Noe gikk galt. Prøv igjen.'); return; }
+
+        const from = (fd.get('from')||'').toString().trim();
+        const to = (fd.get('to')||'').toString().trim();
+        const date = (fd.get('date')||'').toString().trim();
+        const phone = (fd.get('phone')||'').toString().trim();
+
+        if(!from || !to || !date || !phoneRegex.test(phone)){
+          alert('Sjekk at alle felter er riktig utfylt (inkl. telefonnummer).');
+          return;
+        }
+
+        // TODO: Bytt til faktisk innsending (fetch('/api/quote', { method:'POST', body: fd }))
+        success.style.display = 'block';
+        form.reset();
+        success.scrollIntoView({behavior:'smooth', block:'center'});
+      });
+    })();
+  </script>
+</body>
+</html>
